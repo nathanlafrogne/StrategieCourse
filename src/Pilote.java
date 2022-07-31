@@ -1,44 +1,42 @@
+import java.time.Duration;
 import java.util.ArrayList;
 
 public class Pilote{
 
-    ArrayList<Temps> tours;
+    ArrayList<Tour> tours;
     String nom;
-    Temps tempsReference;
+    Duration tempsReference;
 
     Pilote(String nom){
         this.nom = nom;
-        tours = new ArrayList<Temps>();
-        tempsReference = new Temps();
+        tours = new ArrayList<Tour>();
+        tempsReference = Duration.ZERO;
     }
 
     public String getNom() {
         return nom;
     }
 
-    Pilote(String nom, Temps tempsReference) {
-        tours = new ArrayList<Temps>();
+    Pilote(String nom, Duration tempsReference) {
+        tours = new ArrayList<Tour>();
         this.nom = nom;
         this.tempsReference = tempsReference;
     }
 
-    public Temps getTempsReference(){
+    public Duration getTempsReference(){
         return tempsReference;
     }
 
-    public void addTour(Temps tour){
+    public void addTour(Tour tour){
         tours.add(tour);
     }
 
-    public void removeTour(Tour tour){
-        tours.remove(tour);
-    }
 
-    public Temps getTour(int index){
+    public Tour getTour(int index){
         return tours.get(index);
     }
 
-    public ArrayList<Temps> getTours(){
+    public ArrayList<Tour> getTours(){
         return tours;
     }
 

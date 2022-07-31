@@ -24,7 +24,7 @@ public class TempsTest {
     }
 
     @Test
-    public void testAdd(){
+    public void testAddSecondeMilli(){
         Temps temps = new Temps(1,1,1,1);
         temps.addMili(100);
         assertEquals(1, temps.getMinutes());
@@ -51,10 +51,73 @@ public class TempsTest {
         assertEquals(59, temps.getSecondes());
         assertEquals(701, temps.getMillisecondes());
 
-        temps.addMili(300);
+        temps.addSecondesReel(1.125);
         assertEquals(2, temps.getMinutes());
         assertEquals(0, temps.getSecondes());
+        assertEquals(826, temps.getMillisecondes());
+
+        temps.addSecondesReel(1.1751254);
+        assertEquals(2, temps.getMinutes());
+        assertEquals(2, temps.getSecondes());
         assertEquals(1, temps.getMillisecondes());
+
+        temps.addMili(300);
+        assertEquals(2, temps.getMinutes());
+        assertEquals(2, temps.getSecondes());
+        assertEquals(301, temps.getMillisecondes());
+    }
+
+    @Test
+    public void testAddMinutes(){
+        Temps t = new Temps(1,1,1,1);
+        
+        t.addMinutes(2);
+        assertEquals(1, t.getHeure());
+        assertEquals(3, t.getMinutes());
+        assertEquals(1,t.getSecondes());
+        assertEquals(1, t.getMillisecondes());
+
+        t.addMinutes(0);
+        assertEquals(1, t.getHeure());
+        assertEquals(3, t.getMinutes());
+        assertEquals(1,t.getSecondes());
+        assertEquals(1, t.getMillisecondes());
+
+        t.addHeure(0);
+        assertEquals(1, t.getHeure());
+        assertEquals(3, t.getMinutes());
+        assertEquals(1,t.getSecondes());
+        assertEquals(1, t.getMillisecondes());
+
+        t.addHeure(2);
+        assertEquals(3, t.getHeure());
+        assertEquals(3, t.getMinutes());
+        assertEquals(1,t.getSecondes());
+        assertEquals(1, t.getMillisecondes());
+
+        t.addMinutes(57);
+        assertEquals(4, t.getHeure());
+        assertEquals(0, t.getMinutes());
+        assertEquals(1,t.getSecondes());
+        assertEquals(1, t.getMillisecondes());
+
+        t.addMinutes(62);
+        assertEquals(5, t.getHeure());
+        assertEquals(2, t.getMinutes());
+        assertEquals(1,t.getSecondes());
+        assertEquals(1, t.getMillisecondes());
+
+        // Faire le cas où on ajoute une heure en ms ou en s etc
+    }
+
+    @Test
+    public void testAjouteTempsTrop(){
+        Temps t = new Temps();
+        t.addMili(3600000);
+        assertEquals(1, t.getHeure());
+        assertEquals(0, t.getMinutes());
+        assertEquals(0,t.getSecondes());
+        assertEquals(0, t.getMillisecondes());
     }
 
     @Test

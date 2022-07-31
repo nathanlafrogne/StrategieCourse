@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 
 
@@ -7,7 +8,7 @@ import java.util.ArrayList;
 */
 
 
-public class Temps {
+public class Temps{
     int heure;
     int minutes;
     int secondes;
@@ -60,54 +61,30 @@ public class Temps {
 
 
     public Temps addMili(int milliemes) {
-        while(milliemes >= 1000){
-            this.addSecondes(1);
-            milliemes-=1000;
-        }
-        if(milliemes + this.milliemes > 999){
-            this.addSecondes(1);
-            this.milliemes = milliemes + this.milliemes - 1000;
-        }
-        else{
-            this.milliemes += milliemes;
-        }
+        this.addSecondes(milliemes/1000);
+        milliemes -= (int)(milliemes/1000)*1000;
+        this.milliemes += milliemes;
         return this;
     }
 
     public Temps addSecondes(int secondes) {
-        while(secondes >= 60){
-            this.addMinutes(1);
-            secondes-=60;
-        }
-        if(secondes + this.secondes > 59){
-            this.addMinutes(1);
-            this.secondes = secondes + this.secondes - 60;
-        }else{
-            this.secondes += secondes;
-        }
+        this.addMinutes(secondes/60);
+        secondes -= (int)(secondes/60)*60;
+        this.secondes += secondes;
         return this;
     }
 
-    public Temps addSecondes(double secondes){
-        int milli = (int)(secondes-(int)(secondes)*1000);
-        this.addMili(milli);
-        secondes -= (int)(secondes);
+    public Temps addSecondesReel(double secondes){
+        int milli = (int)((secondes-(int)(secondes))*1000);
         int sec = (int)secondes;
-        this.addSecondes(sec);
+        this.addMili(milli + sec*1000);
         return this;
     }
 
     public Temps addMinutes(int minutes) {
-        while(minutes >= 60){
-            this.addHeure(1);
-            minutes-=60;
-        }
-        if(minutes + this.minutes > 59){
-            this.addHeure(1);
-            minutes = minutes + this.minutes - 60;
-        }else{
-            this.minutes += minutes;
-        }
+        this.addHeure(minutes/60);
+        minutes -= (int)(minutes/60)*60;
+        this.minutes += minutes;
         return this;
     }
 

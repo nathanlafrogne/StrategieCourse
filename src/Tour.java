@@ -1,21 +1,23 @@
+import java.time.Duration;
+
 public class Tour extends Temps{
-Temps tempsTour;
+Duration tempsTour;
 Pilote pilote;
 
-    Tour(Temps temps, Pilote pilote) {
+    Tour(Duration temps, Pilote pilote) {
         this.tempsTour = temps;
         this.pilote = pilote;
     }
 
-    public Temps getTempsTour() {
+    public Duration getTempsTour() {
         return tempsTour;
     }
 
     public int getTempsEnSeconde(){
-        return (int)tempsTour.enSeconde();
+        return (int)tempsTour.toSeconds();
     }
 
     public int getTempsEnMillisecondes(){
-        return (int)tempsTour.enMilli();
+        return (int)tempsTour.toMillis();
     }
 }
